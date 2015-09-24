@@ -10,7 +10,7 @@ mtcars$carb<-as.factor(mtcars$carb)
 names(mtcars)<-c("mpg","cylinders","displacement","horsepower","axle.ratio","weight","time","V/S","transmission","gears","carburetors")
 dataset <- mtcars
 
-shinyUI(navbarPage("1974 Car Road Tests, Motor Trend Magazine",
+shinyUI(navbarPage("1974 Road Testing, Motor Trend Magazine",
         tabPanel("Exploration",
                  fluidPage(
                    plotOutput('plot'),
@@ -34,7 +34,7 @@ shinyUI(navbarPage("1974 Car Road Tests, Motor Trend Magazine",
                               column(width = 4,
                                      h4("Options"),
                                      checkboxInput('rug','Data distribution'),
-                                     checkboxInput('smooth', 'Simple model fit:'),
+                                     checkboxInput('smooth', 'Fit model'),
                                      conditionalPanel(
                                        condition = "input.smooth == true",
                                        selectInput("smoothMethod", "Pick modelling method",
@@ -59,15 +59,14 @@ shinyUI(navbarPage("1974 Car Road Tests, Motor Trend Magazine",
                  h3("How to use this app"),
                  tags$div(
                    tags$ul(
-                     tags$li("Pick the descriptor variable from the 'X' drop down, defalts to weight (lb/1000)"),
+                     tags$li("Choose the descriptor variable via the 'X' dropdown, default: weight (lb/1000)"),
                      tags$li("The Y axis (responce variable) is limited to miles per gallon (mpg)"),
-                     tags$li("Decide whether to examine data groupings using colour, selecting options via the 'Grouping' drop down"),
-                     tags$li("Pick to view via one plot or multiple fillered plots for discreate variables using the 'Facits' 'Row' and 
-                             'Column' drop downs"),
-                     tags$li("Select 'Data distribution' checkbox to see the data distribution"),
-                     tags$li("Select 'Pick modelling method' checkbox to model the relationship between miles per gallon and the X predictor 
-                             variable (formular: y~x), one per grouping/facet when selected, visulised with 95% confidence intervals around the 
-                             modelled fit. Pick from the following methods:")
+                     tags$li("Use the 'Grouping' dropdown to decide whether to examine data groupings using colour, default: transmission type"),
+                     tags$li("View one or multiple plots by cylinder-, gear-, carburetor- number, or transmission type using the 'Facits' Row and
+                             Column dropdowns"),
+                     tags$li("View distribution of data points via the 'Data distribution' check box"),
+                     tags$li("Option to fit a simple y~x model to the selected data, when grouping/facets selected one model per data subset. 
+                             Visulised through predicted fits with 95% confidence intervals. Five methods to choose from:")
                    ),
                    tags$ol(offset=5,
                      tags$li("lm - linear model, default"),
