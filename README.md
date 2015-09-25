@@ -1,6 +1,8 @@
 # ShinyApp
 Data products project
 
-Code for shiny app (ui.R and server.R) hosted on shiny.io here: https://s101.shinyapps.io/DataProductsProject_RoadTesting
+Folder contains code for shiny app - ui.R and server.R - and code used for slidify presentation. 
 
-Code for presentation hosted on github at: http://s101.github.io/ShinyApp/index#1
+App hosted on shiny.io here: https://s101.shinyapps.io/DataProductsProject_RoadTesting
+
+Presentation hosted on github at: http://s101.github.io/ShinyApp/index#1
