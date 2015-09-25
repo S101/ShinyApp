@@ -1,1 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>1974 Road Testing</title>
+  <meta charset="utf-8">
+  <meta name="description" content="1974 Road Testing">
+  <meta name="author" content="S101 for the Coursera Data Scientist Spesialisation, Data Products module">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/highlighters/highlight.js/css/Xcode.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/custom.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
 
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="http://slidifylibraries2.googlecode.com/git/inst/libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/js/slides" 
+    src="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>1974 Road Testing</h1>
+    <h2>Motor Trend Magazine</h2>
+    <p>S101 for the Coursera Data Scientist Spesialisation, Data Products module<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:white;">
+  <article data-timings="">
+    <!-- Limit image width and height -->
+
+<p><style type='text/css'>
+  img {
+    max-height: 460px;
+    max-width: 664px;
+  }
+</style></p>
+
+<h2>Goal</h2>
+
+<p>When shopping for a new car, what factors affect the rate of fuel consumption? Does the transmission/number of cylinders affect the miles per gallon (mpg)? </p>
+
+<ul>
+<li>I&#39;ve developled a simple shiny app that lets us visulise this and see if there are any patterns across a variety of makes-models.</li>
+</ul>
+
+<h3>From a project point of view...</h3>
+
+<p>This presentation was created as part of the peer assessment for the coursera developing data products class. The assignment is designed to build knowledge and understanding of:  </p>
+
+<ul>
+<li>The shiny package to build a data application</li>
+<li>use of R-Presentation or slidify to create a presentation (ie this one about the app) </li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:white;">
+  <hgroup>
+    <h2>The Data</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Extracted from the 1974 Motor Trend US magazine 
+Tested 32 make-models of car (1973-74 models)
+Data comprises fuel consumption (Miles/(US) gallon) and 10 aspects of automobile design and performance:  </p>
+
+<div style='float:left;width:48%;' class='centered'>
+  <ol>
+<li>Number of cylinders</li>
+<li>Displacement (cu.in.)</li>
+<li>Gross horsepower</li>
+<li>Rear axle ratio</li>
+<li>Weight (lb/1000)</li>
+</ol>
+
+</div>
+<div style='float:right;width:48%;'>
+  <ol>
+<li>1/4 mile time</li>
+<li>V/S</li>
+<li>Transmission</li>
+<li>Number of forward gears</li>
+<li>Number of carburetors</li>
+</ol>
+
+</div>
+<div>
+  <p>Datasource: Henderson and Velleman (1981), Building multiple regression models interactively. Biometrics, 37, 391-411.</p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:white;">
+  <hgroup>
+    <h2>The App</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Explore the relationship between the 10 car design and performance variables and the car&#39;s fuel consumption in miles per gallon (mpg) via a point plot (using the ggplot2 libray) </p>
+
+<h1>To use this app</h1>
+
+<ul>
+<li>Choice of descriptor variables via the &#39;X&#39; dropdown, default: weight (lb/1000)</li>
+<li>The Y axis (responce variable) is limited to miles per gallon (mpg) </li>
+<li>Use the &#39;Grouping&#39; dropdown to decide whether to examine data groupings using colour, default: transmission type</li>
+<li>View one or multiple plots by cylinder-, gear-, carburetor- number, or transmission type using the &#39;Facits&#39; Row and Column dropdowns</li>
+<li>View distribution of data points via the &#39;Data distribution&#39; check box</li>
+<li>Option provided to fit a simple y~x model to the selected data, when grouping/facets selected one model per data subset. Visulised through predicted fits with 95% confidence intervals. Five methods to choose from: linear, generalised linear model,generalised additive, local polynomial, or robust linear (iterated re-weighted least squares)</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:white;">
+  <hgroup>
+    <h2>Underlying Code</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>When, for example, x axis = &#39;weight&#39;, y axis = &#39;mpg&#39;, grouping = &#39;transmission&#39;, the simple model fit box is checked and the &#39;pick modelling method&#39; is set to lm the following ggplot is produced with two liner a linear models fitted, one of manual transmissions and one for automatics.  </p>
+
+<div style='float:left;width:48%;' class='centered'>
+  <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAABCFBMVEUAAAAAADoAAGYAOjoAOmYAOpAAZpAAZrY3frg6AAA6ADo6AGY6OgA6Ojo6OmY6OpA6ZmY6ZrY6kNteiaxmAABmADpmAGZmOjpmOpBmZgBmZjpmZmZmtv92j6R/f39/f5V/f6t/lcF/q9aQOgCQOjqQOmaQtpCQ2/+Vf3+VlcGVweurf6urlZWr1v+0a2y1tbW2ZgC2Zjq2kJC22/+2/7a2//+5ubm+vr7BlX/BlZXBlavBwdbB6//GTU7Hx8fOzs7Wq3/W1tbW///bkDrb25Db/7bb/9vb///kGhzl5eXrwZXr1qvr///y8vL/tmb/1qv/25D/27b/68H//7b//9b//9v//+v///+1L57lAAAACXBIWXMAAAsSAAALEgHS3X78AAAarElEQVR4nO3dDXvbRnYFYNmt10zTNo3lzX7UUTbxbtU6dai063ibLinR2taEG0tqFZv//58UHyQIzNw7cwHMBTDAOc+uItPSMXRfDQiREHGyQ2aZk6E3ABkmgJ9pAD/TAH6mAfxMA/iZBvAzDeBnGsDPNICfaQA/0wB+pgH8TNMEPqnnfSKM+YlcghfG0HgsVDMmA/iBGwEfBRPgdWcQqDCGRsBHwQR43RkEKoyhEfBRMAFedwaBCmNoBHwUTIDXnUGgwhgaAR8FE+B1ZxCoMIZGwEfBBHjdGQQqjKER8FEwAV53BoEKY2gEfBRMgNedQaDCGBoBHwUT4HVnEKgwhkbAR8EE+GyT12ozCFQYQyPgo2ACfLbJa6E84EWFasZkAD9wI+CjYAJ8ksPL5AEvKlQzJgP4gRtjgH9v5DKNeRsV6xO7JnjhKBrVjMl0XPGiJY8VLypUMybTFV4iD3hRoZoxGcAP3BgtvEAe8KJCNWMygB+4EfBRMAE+KeH98oAXFaoZkwH8wI0Rw3vlAS8qVDMmA/iBG2OG98kDXlSoZkwmCLxHHvCiQjVjMmHg3fKAFxWqGZNRgV8sOs7AE8B3TyD4mvxiUZcHvKhQzZgM4AdujB3ekO84A08A3z0q8J1n4AnguwfwAzdGD++QB7yoUM2YDOAHbowfnpcHvKhQzZgM4AdunAA8Kw94UaGaMRnAD9w4BXhOHvCiQjVjMoAfuHES8Iw84EWFasZkAD9w4zTgaXnAiwrVjMkAfuBGwEfBBPiEhiflAS8qVDMmA/iBG6cCT8kDXlSoZkymC/wC8N0bJwNPyBufaJyRR83AE8B3T6ddvXDJ1z/RPAeXmoEngO+e8PC2POBFhWrGZLod3MmWPHb1okI1YzIK8JY8Du5EhWrGZDr+OCda8oAXFaoZk9GAN+UBLypUMybT9QEcyZIHvKhQzZhM50fuBPKAFxWqGZPRga/LA15UqGZMpvtj9f4lD3hRoZoxGSX4mjzgRYVqxmQCPDvnXfKAFxWqGZPRgq/KA15UqGZMJsTz8b4lD3hRoZoxmSAnYnjkAS8qVDMmE+YMHEq+yww8AXz3BDr1yikPeFGhmjEZwA/cGDm8Ux7wokI1YzKAH7gxdniXPOBFhWrGZMKdV0/It56BJ4DvHlX4ddsZeAL47gn4mzTskge8qFDNmIwu/LrlDDwBfPeE/N05bskDXlSoZkxGGX7dbgaeAL57gv62LLPkAS8qVDMm0wF+cVrYnp565AEvKlQzJtMefrEoxE9Pj/KAb9w4DXhaHvCiQjVjMmF39YBv3BghPPlSKLY84IWFasZk9OHXgJcVqhmT4eGvzs5eZm+/+vPhFnOTKXhqyQNeVNiLdxkW/vab3c/fvrn9+qf0f/ubzE0m4Ql5wIsKexLfx7WrT+Hfvcjepu+fpTH/fkNmYd2it/VI6zjgr85e7N693H388c3+BvN7lV7x9pLfNP7m9wQrvnucB3fvXpQrPou5yYAP0Dg6+NsXGXyL+3hbfuO+vDwxA08A3z3Oo/pvWhzVA75Z4/jg7ZibzMGb8hvnlWepGXgC+O5RgTfkU3iRfARMgE+c8HX5DF4iHwET4PNNFsoDXlSoZkymE7xD3oIXyEfABPj9JovkAS8qVDMm0xGel7fg/fIRMAE+8cFX5AEvKlQzJtMVXiK/h/fKR8AE+OMmA75T4wThS/kDvE8+AibAVzYZ8F0aI4b3ypfwHvkImABf22TAt2+MGt4jf4R3y0fABHhjBk55wIsK1YzJBILn5E14p3wETIC3ZuCQB7yoUM2YTN/wLvkImABvz4CXB7yoUM2YTDh4Rt6Ed8hHwAR4agacPOBFhWrGZELCc/J1eF4+AibAkzMAfPPGScDzd/Mi+QiYAM/MAPBNG6cMvxHKR8AEeG4GgG/YOBV4Sn4j3NlHwAR4fgYUvEw+AibAO2ZAwZvynhl4Avju6QteIh8BE+BdM5DAU/IRMAHeOYMD7v7FTotH7vzyETAB3jmD0r2QB7yoUM2YjAp8QsH75SNgArxnBsSu3n98FwET4H0zsA7uBEs+AibAe2dAwPuWfARMgPfPwA9vykfABHjBDGx4z5KPgAnwkhl44Q35CJgAL5mBDe9e8hEwAV40AxveKR8BE+BlM/DC1+QjYAK8bAY2vGvJR8AEeOEMvPBV+QiYAC+dgQXvWPIRMAFeOgMvfEU+AibAi2dgwfNLPgImwMtnYMGz8hEwAV4+Ay98KR8BE+AbzMCC55Z8BEyAbzKDI/z+zAxmyUfABPgmM9gc3Wn5poWA754+4Hc++HXTQukHRtA4aXjzfGtmyUfABPiGMzAP70j5CJgA33QGEvkImADfeAYe+eaFkkTQOHl4S95e8hEwAb7FDLzyETABvsUMPPDrGJgA32YGviUfARPgW83AIx8BE+BbzcADf9m40BfAs+kV3iMP+B7TL7wpb8BLLjJvFLoDeDbDwtflAd9jmsC/b5nqJ17WszD+3LwwTMbQqGZMpucV71zyl4JLjVuFzmDFs+kb3iWfwsvkAd89Y4MXyQO+e3qHd8gDvsf0D8//SJfDS+QB3z3Dwx/lC3iBPOC7ZwB4dsm3hd9uuQ8EPJsh4Dn5Pbxfvl643bLygGczBvhCfrk8wHvlAd89g8CTS365/KEdPHb1bTIMPCWfwi+F8ji4655xwQvlAd89A8ET8jn8EvA9ZSj4hIEXyQO+ewaDt+T38EvA95Lh4E35A7xAHvDdMxr4VH4PvwR8DxkQ3pBfLg7wXnnAd88o4X3ygO+eIeHr8svlYimUB3z3DAqfsPBuecB3z5jgf5DKA757hoVP6vDWmm9eGH4TlRtnCp/w8A55wHfPuOCF8oDvnqHhEwf8EvB6GRm8TB7w3TM4fOKCZ+RnAP/h+UmaZ26Qu785d/zRnbHBm/LLmcI3ZGye4eGTOrxEfjbwNycnD//49OTk0dubh785efgq2w883l0/+NuTXzxPb0w/pLileJt9xkX2TvHBI4ZfLPL/uOEJ+Wohf6ZlkE1Ub/TA5zv7mwfn6f/uPnmW3va//57Cn6d/UfyxuKV8e/Pw1f3TJ8UHjxd+sSjk6/C2vKvQcW51iE3Ub3TDP0h39+kiflCIPsvef/jq+uGr8vuguKV4m/7x+tHb3cXj/QePHj7xwFvys4K/SPfzJfxul76twee3FG+PK37k8IddvQHvl5/Prv5Bfj//V588Kyyz+/JHb6vwxS3F28p9/Mjhy/jgDflZHNwpZ4zwXnnAd8844JM6PCFfO7QHfPfU4e+fnuShfwjUnIEPviY/B/iNFU343cWT9M3145v0p4Ih4T3ys4C/NKMJf//Fq/ztH7+glrzqDPzwR3nAh4b/8Dxf8Y/+8lnfKz5JavBuecCHhs8fJjp5zPwQqDuDtQ/+KA/48PCu6M6gDs/IrxsUht9EjUbAb9c1eJf8nOBXKwb+36h74/z2e/IIzQ2fP///eBD49Xa7FMrPCH61KuXrf3//axqeu90Nvz+4Y+R1Z7BeX6688sX5l/OA39aSw+ePxN99vtt9f36Rvlf88R+enjy5OMmeljvJb3ucrfjr7MF7Ofzhxzl6V6E7g+zlzlYrD3whPw94e1efkn/4/XkBn67sm3SBXjy7+7R4wvZZ8bfp7anfXfpj2fUTOXyx2Adb8enP8iL5OcHXDu6us6fmS/jr9GevmyeZ9x9epfDF3xbwN050G/7wkC39mK3uDPIXOEzlV374jfRfnhh8uoazFf/Z2/tfVlb8Ab742+OKv+GO1Qh4d1RnsF0V8LVFz8hvpNcwmRj83ScnD36bPSn/8Lfn908fvT3c5Rfwxd+mt/9XcR/vPuvOgL9xPEejCr/dpndm6738yiO/cf0Otdom6jSO4+f4dBfi+FjNGVThK4s+hf/ySxJ+Xf9s31QDbKJO40jgnT/6q86g2NWX8gf6xZdf2vIb43eo2RPvAC+Ed/8IoDuDdRW+XPQU/HKzPxX/8KmA7w4/1H18CX+UXx3krXv512tL3jfVIJuo0TiOEzGGu4+34feLnjq8ey19teOY4edyH1/CV+VXtPwR3iMPeCH8CO7jM/jj3r0iX9nlv14K5QEvhN8/cjfoffx6XT2eWx3gqzem8DJ5wAvh3dGdwRH+tHogf5Bn4V3ygGczRvh17UB+VS756q5eJg94NqOErxzf5Yd45vFdDl+RZ+knAH962gBedO5NNPD2gX0BL5CPH/70tJSfA7wlv6Lg/fJRwy9qyZ+dq59sc/d3n2S/I5s/PV/cMjl4Q/4A75WPGt7e1Rsn29x99rY8IWd/+k308PbOvnqCRgnvk58AfPXgzjjZpiTPVnxx+s3k4LO7+RUB75GfKvz+VJwCPj8hZ3/6Tfzw1PFduehpeEJ+qvDFyTYFfHFCzv70m+nBF0f2KwveLT8x+JAZLTz9I12x6KvwNXmTHvBsxgvP/DC/csIb8oBnM2J4Tn5Vh3fJRwyvHRb+45/Ozr7+aXd19tWfDzfpzsALXz6At6rDO+QBz4aFv/1mt7t6efv1T+n/9jfpzsCG5+VXQnnAs3Hu6t+9fPdi9/O3b9J3z9Lobol9ktnmtZFF+d6q/heqZ6dNMy74dNG/e7n7+OOb/Z91v/mJFc8t+dfmojc/T2kTNRpHuOKv0p19ueKz6M6Ag68+OX+EN+gZecCzcRzcvUzfDnsfX5x/Z8u/tu/qaXnAs2Hhr7J79ReDHtUT8IV8eVS/YuHXGpuo0Tg6eCK6MyDh1+bvztXhXfLr8Juo0Qj4tJCEJ47vKj/Hu+UBz2ZU8OaVxSl5A94pvwY8m5HB2/LUkq89cnc8xLPhL0NvIuAVZ+Bf8sZDtiseXvrSGYB3pb8ZeJa8AX9c9MfPWq0KeFa+/gu2gHelvxkY1xc35U14e9FnrwtYwDPyxq/UA96V/maQ1C8z7YcvF70NT9MDvsHH9jeDIq7jO4LekF+X8Ix8m00EvO4MyjSA3y964+BuzdO32UTA686gEkr+NS2/tOSPjwUG2kTA686gmgbwxaIn4T3ygHelvxkYMeVfMzv7YtHb9/F+ecC70t8MzBjyr7m7+WLRm0f1AnnAu9LfDKzU5V3w2aKn4V30gHelvxlYqR/iZT/Hu+RX1K7eSQ94V/qbgZ119Qc7D3xKbx/cuekB70p/M7BzcCvh3fLbLQdPywPelf5mQKQq74dfrrccPEkPeFf6mwGRCtz+2TmBPA1PyAPelf5mQKUCt1kK5Rl4mx7wrvQ3AypV+LUA/rvVloc35QHvSn8zoFKDL+7tXfLffbda7Q/xBPSAd6W/GZAx4VN6h/x3qfz6UioPeFf6mwEdC94jv0x39cJFD3hX+psBEwt+vbCfrC/Zl8v8Pl4kD3hX+psBExs+lSfp0x19Jv9D9iGSRQ94V/qbARcSnpI/wBfP0frlAe9KfzPgYsPn8oR97p7C7+V99IB3pb8ZsOHg6R1+Br8/IccjD3hX+psBGxveKX+E9yx6wLvS3wz42PClPEGfwZfn4LnkAe9KfzPg44K35XP4ozxPP9z1qQEvLLThK/KmfR0+o1+t1lQ2wstTA153Bo544Ov0Jvx6ldIz8DJ6wA8Fn9jwvLwNv1qR+3vz+tQdtzEBfLsZuOKFr9hb8NlJmNRdfdkYZhsTwLebgTM2vC2/5uDz2PKVxiDbCPh2M3CGgOfkGXh70VcbQ2wj4NvNwB0RfE7PwVuLvt4YYBsB32oG7hDwjDwPb8gbjd23EfCtZuCJEH69dsDX5e3GrtsI+H7gaflLB3xNnmrsto2AHxQ+v6dn4KuHeFRjP5cwBHyTQoqJks9OveLhK4uehO/lSnaA7wpPye9f9cohv3XC93AlO8A3KmwGT71Gbkl/hKefwOnti1YzJjMheEL++Dp3DvntHn7/YgpuesAPCy+Ur77AoYPeA1+lB3x08M5F79jV1+0BPzC8TN54SVMHvYO8Rg/4UcKb8tZr2XKoG+e5mBV5wA8NL5InXsSYgZct+jXgk1jh6c/L7uMliz78NS8A37hQIE++bDkHL1r0wa95Afi28KenDeEp+f0jd/5Ff0kVhvmi1YzJRA9/euqQZy5UwML7F73jFfC7ftFqxmQihk9aw9v0x8fqPYv+8Ko6Cl+0mjGZmOEP8obNwmSiKlh4z6IP/kLogG9TSOMc5S/zB+PoEhbeueiDvx424DXgi4ffmRYW3rXo6y+gFvSLVjMmEze8T94JT72Ollc++OthA14D3rWrr326dSIGJx/8ZZEB367QLc8f3Bmfb5+Bw8gHf1lkwIeFr16owPz02iXnOHjmEC/4yyIDvmUhI++40qRxkUkOnl70wV8dF/BB4VcLMTz1G/cHeZuehzf+IcArw7NLvmQ6XRifXncnf/G6pG8E3+ZFUgEfFr44vsuYTk8XprwVFt5a9B745i+SGgP8+5Zp/Ymywksyi8M7Gby3cUOXZNnyf0Wn7RetZkwm/hXvWvL0rp5s5BdxbdH7Vny57Ke04tlN9k616QyaFXrgJU+fc+ftWvQieM9rZdaOMQAfGj6TbwLvkj/Sy+DTbNh/q/5TBeCDw6fyjeCd8ofjezk8+w8D3kzrwkDwHnnHlewYeOafxq4+VCE3/EVDeMGibwjv/7cB36WQlW8K7130TeG9/zzg1eBXW6qDa3RzblvAu+0B36mQmf7lIjsZw3yI1t3okRf9wo0J77AHvAp8/gRtM3i3/KXsV63kr6MF+G6FHFMm32hXz5cdGmXyxKP/ni9azZjMDOAbHdy52vaNMnn6aR/XF61mTGby8Kl8i0YnvEiefb6P/aLVjMlMBZ6mag3PyhdH9YJDPBbeoAe8Fvxa8ORck8PFIl55BzzzakpqxmQmA09KdYB3fSvl8h56F3zVHvBq8K129e7Ggr4LfLlZgO9cGByeb9zLu+gBHzE8UVl/yNYhD/je4FmmDpvogXcsesBHDW91Wk/ScPKA7w+eW58dGq1O+9k5ZtEDvkd4Zn2SH1p/5saxiT54ZtEDfpzwxu9ROTfRB+++hCHgvQlQqAJfrWVOxHBewhDwnvQJL9/V13u5M3CclzAEvDshCsXw4sZ6L3/qlfMShoB3ZczwSa2RlvdcyQ7wXIIUasEnXnj/lewAT2fc8Ikf3nslO8CTCVOoBp/44f1XsgM8kbHDZ93e8+oP8oDvG74qHxo+EfwmjecShoC3EwF8IvhNmsolDAEvSgzw7/3wx0sYAl441ECFqvCeX7Ha0wO+yVTjgJfJbwHfP7z5yHqAxjLvE5m84NT7Y+F+G3oN4EWNZd7X+h3ZeOkrhcU29JpJwhtPqYRoPOR9rd8J7zsBu1qYb0OvAbys8ZD39X/ADe9e9LXCBPBBCrXh/fKHK9kBXj7UAIXq8F76w1E9v+jNQjVjMhOFrz2JGqaxSGUbZfD8ojcL1YzJAF7aWKS6jUJ4btGbhWrGZKYKX332PFBjnto2CuGZRW8WqhmTAby4MU99G6Xw5KI3C9WMyQBe3JjH2EYpPLXozUI1YzKTha+cLxOqMYu5jWJ4e9GbhWrGZAAvb8xibaMY3lr0ZqGaMZnpwif9wHPy1LNz9UVvFqoZkwF8g8aE3EY5fH3Rm4VqxmQmDJ/0BE/LM8/HV+TNQjVjMoBv0shsYwP4irxZqGZMZsrwSV/wlDx/JTvAy4baobA3eEKeP/XqcIhnFqoZkwF8o0Z+G+Xwh0VvFqoZk5k0fNIjvCnvPNkyX/RmoZoxmWnDv+8R3pD3nGW7Bbxi4f4s+LCNfJrArw+vyAH4+OFr8jivflj4pE/4qjzg5wRfkQf8wPBJr/BHecDPC76UB/zM4A/yBPxqVfvT1ihUMyYzffikZ/iEg1+tqvKH6yACfjLwCeAPX5Hw45Tg+2/Ern7/FQk/bjLwCQ1vxCxUMyYDeJ3GmOF//vbNbnd19tWfDze0nMEs4ZN44W/Pfvdmd/v1T+n/9re0ncEs4Xexwn/8z48/vtm9e1Es/N1Zmh43awrZeDLs1jl29Tn8y/w/RVp/8ws/blor3vsb9GZhL95lfPCHFZ+lwwxEmRq8R94s7MW7jAce9/HdGqOFx1F9x8YY4a10nIE3wzMpNALenxEwKTQC3psxMCk0At6XUTApNALek3EwKTQC3p2RMCk0At6ZsTApNALeldEwKTQC3pHxMCk0Ap7PiJgUGgHPZkxMCo2A5zIqJoVGwDMZF5NCI+DpjIxJoRHwZMbGpNAIeCqjY1JoBDyR8TEpNALezgiZFBoBb2WMTAqNgDczSiaFRsBrF461EfDKhaNtBLxu4XgbAa9aOOJGwGsWjrkR8IqFo24EvF5hDI2Aj4IJ8LozCFQYQyPgo2ACvO4MAhXG0Aj4KJgArzuDQIUxNAI+CibA684gUGEMjYCPggnwujMIVBhDI+CjYAK87gwCFcbQCPgomACvO4NAhTE0Aj4KJsDrziBQYQyNgI+CCfC6MwhUGEMj4KNgmid82wS/pkn4i6TE0Bg2gI+mMWwAH01j2AA+msaw6QMeGWEAP9MAfqYB/EwD+JlGHf7jn87OyksWBsnV2dnLkH1Z3r0I25du4/F6faOMOvztN+kYQkKlhcernobqPAsL//E/xq2+62lX/y7wCg0N/3//8j9h4X/+138++yZoY/D0AX8beAZXgddn+n10G7bx9ndvgn+3B04P8Ffhv/fD3iW/O0sT+E4+xQ/eGDQ9HNwF/s7PBhr6WCy0Ur6NM1/xV8GXU9oYfB8SenleKexCwgY/x880gJ9pAD/TAH6mAfxMMxn4i2e73c1J9ubx/pa7T1/V3zvegEwH/vpJ+v9/fFK8YwTwdiYDf/fZ2w+//6fszfnu/unJw1e5c/reX//q/O7T35ycPCtuRYpMBv7+i1f3v/7vP7xK/7u7eLK7fpzDp+/dPDi/+yT9z6O3WPGVTAY+Xel3n6f39Omb+1+eZ98HqXP2XZD9xaf5+gd8JZOB310/u362u3mS3sWn+/STkwcZd7r/Bzyd6cDfPP7+fHf3+ff5as9uwIp3ZTrw97/Kl/ffp7gX5V36/j4e8FamA//hefYD/EX2Jt3XPzg/HNX/olzxH57jqL7MdOC5YJ2TmTb8h+fZUd7QWzHKTBseYQP4mQbwMw3gZxrAzzSAn2kAP9MAfqb5f9hFjoynX3V5AAAAAElFTkSuQmCC" alt="plot of chunk unnamed-chunk-1"> </p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <pre><code class="r">ggplot(mtcars, aes(x=wt, y=mpg,
+                   colour=Transmission)) + 
+  geom_point() + 
+  xlab(&quot;Weight&quot;) + 
+  scale_colour_brewer(palette=&quot;Set1&quot;) + 
+  geom_smooth(method=&quot;lm&quot;)
+</code></pre>
+
+</div>
+<div>
+  
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='NA'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='The Data'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='The App'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Underlying Code'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="http://slidifylibraries2.googlecode.com/git/inst/libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

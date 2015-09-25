@@ -1,0 +1,102 @@
+---
+title       : 1974 Road Testing
+subtitle    : Motor Trend Magazine 
+author      : S101 for the Coursera Data Scientist Spesialisation, Data Products module
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : Xcode  #default # change the presentation of rcode Xcode also has r code without colour blocks or outlines :)
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : standalone # {selfcontained, draft}
+knit        : slidify::knit2slides
+
+ # good websites:
+ # https://highlightjs.org/static/demo/
+ # https://www.uvm.edu/rsenr/vtcfwru/R/fledglings/14_Slideshows.html
+ # https://code.google.com/p/slidifylibraries/source/browse/inst/libraries/frameworks/io2012/css/slidify.css?r=f9b80e4b5ae02a0a8dd8688e4b6d1cf1852281b6
+ # http://zevross.com/blog/2014/11/19/creating-elegant-html-presentations-that-feature-r-code/
+---
+<!-- Limit image width and height -->
+  <style type='text/css'>
+  img {
+    max-height: 460px;
+    max-width: 664px;
+  }
+</style>
+  
+
+## Goal
+
+When shopping for a new car, what factors affect the rate of fuel consumption? Does the transmission/number of cylinders affect the miles per gallon (mpg)? 
+
+* I've developled a simple shiny app that lets us visulise this and see if there are any patterns across a variety of makes-models.
+
+### From a project point of view...
+This presentation was created as part of the peer assessment for the coursera developing data products class. The assignment is designed to build knowledge and understanding of:  
+* The shiny package to build a data application
+* use of R-Presentation or slidify to create a presentation (ie this one about the app) 
+
+--- &twocol
+
+## The Data 
+
+Extracted from the 1974 Motor Trend US magazine 
+Tested 32 make-models of car (1973-74 models)
+Data comprises fuel consumption (Miles/(US) gallon) and 10 aspects of automobile design and performance:  
+
+***=left
+1. Number of cylinders
+2. Displacement (cu.in.)
+3. Gross horsepower
+4. Rear axle ratio
+5. Weight (lb/1000)
+
+***=right
+6. 1/4 mile time
+7. V/S
+8. Transmission
+9. Number of forward gears
+10. Number of carburetors
+
+***=fullwidth
+Datasource: Henderson and Velleman (1981), Building multiple regression models interactively. Biometrics, 37, 391-411.
+
+---
+
+## The App
+Explore the relationship between the 10 car design and performance variables and the car's fuel consumption in miles per gallon (mpg) via a point plot (using the ggplot2 libray) 
+
+# To use this app
+* Choice of descriptor variables via the 'X' dropdown, default: weight (lb/1000)
+* The Y axis (responce variable) is limited to miles per gallon (mpg) 
+* Use the 'Grouping' dropdown to decide whether to examine data groupings using colour, default: transmission type
+* View one or multiple plots by cylinder-, gear-, carburetor- number, or transmission type using the 'Facits' Row and Column dropdowns
+* View distribution of data points via the 'Data distribution' check box
+* Option provided to fit a simple y~x model to the selected data, when grouping/facets selected one model per data subset. Visulised through predicted fits with 95% confidence intervals. Five methods to choose from: linear, generalised linear model,generalised additive, local polynomial, or robust linear (iterated re-weighted least squares)
+
+--- &twocol
+
+## Underlying Code
+When, for example, x axis = 'weight', y axis = 'mpg', grouping = 'transmission', the simple model fit box is checked and the 'pick modelling method' is set to lm the following ggplot is produced with two liner a linear models fitted, one of manual transmissions and one for automatics.  
+
+*** =left
+ 
+![plot of chunk unnamed-chunk-1](assets/fig/unnamed-chunk-1-1.png) 
+
+*** =right
+
+
+```r
+ggplot(mtcars, aes(x=wt, y=mpg,
+                   colour=Transmission)) + 
+  geom_point() + 
+  xlab("Weight") + 
+  scale_colour_brewer(palette="Set1") + 
+  geom_smooth(method="lm")
+```
+
+
+
+
+
+
